@@ -1,34 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 //previa das funcoes
 void troca(char *);
-int contagem(char *);
 void main();
 
-//funcao q ira encontrar o tamanho da string
-int contagem(char *string){
-    
-    int i = 0;
-    char fim;
-    
-    for(i ; fim != '\0' ; i++){
-        fim = *(string + i);
-    }
-
-    return i;
-}
 
 //ira inverter a string
 void troca(char *string){
 
-    int tamanho = contagem(string) - 1;//O - 1 é para correcao do tamanho,
+    int i;
+
+    int tamanho = strlen(string);//O - 1 é para correcao do tamanho,
                                        //pois a ultima casa da string é '/0'
                                        //q n deve ser invertida.
                                        
     char troca;
 
-    for(int i = 0 ; i < ( tamanho/2 ) ; i++){
+    for( i = 0 ; i < ( tamanho/2 ) ; i++){
         troca = *(string + i);
         *(string + i) = *(string + tamanho - 1 - i);//A contagem se inicia no 0, logo
                                                     //é preciso subtrair 1 do tamanho da 
@@ -40,8 +30,6 @@ void troca(char *string){
     
         *(string + tamanho - 1 - i) = troca;
     }
-
-    //printf("%s \n", string);
 }
 
 void main(){
@@ -54,5 +42,7 @@ void main(){
     troca(string);
 
     printf("%s \n", string);
+
+    free(string);
 
 }
