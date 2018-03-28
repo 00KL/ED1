@@ -127,35 +127,27 @@ Matriz* transposta (Matriz* mat){
 Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
     
     //Criacao matriz multiplicacao
-    int i, j;
+    int i, j, x, aux = 0;
     
-    matriz *matriz = (matriz *)malloc(sizeof(matriz)); 
-    matriz->n = mat1->n;
-    matriz->m = mat2->m;
-    
-    matriz->mat = (int **)malloc(mat1->n * (int *));
-    
-    for(i = 0; i < matriz->n; i++ ){
-        
-        matriz->mat[i] = (int *)malloc(mat2->m * sizeof(int));
- 
-    }
+    matriz *multi = inicializaMatriz ( mat1->n , mat2->m);
     
     //Multiplicacao
-    for(i = 0; i < matriz->n; i++ ){
+    for(i = 0; i < multi->n; i++){
         
-        for(j = 0; j < matriz->m; j++){
+        for(j = 0; j< multi->m; j++){
             
-            matriz->mat[i][j] = mat1->[i][j] * ;
-
+            //codigo para receber resultado em aux AQUI
+            
+            multi->mat[i][j] = aux;
         }
         
     }
+   
     
     
     
     
-    return matriz;
+    return multi;
     
     
 }
