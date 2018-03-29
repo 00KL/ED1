@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "matriz.h"
 
 
@@ -29,11 +30,12 @@ typedef struct matriz{
 Matriz* inicializaMatriz (int nlinhas, int ncolunas){
     int i;
     
-    matriz *matriz = (matriz *)malloc(sizeof(matriz)); 
+    matriz* matriz;
+    matriz = malloc(sizeof( matriz)); 
     matriz->n = nlinhas;
     matriz->m = ncolunas;
     
-    matriz->mat = (int **)malloc(matriz->n * (int *));
+    matriz->mat = (int **)malloc(matriz->n * sizeof(int *));
     
     for(i = 0; i < matriz->n; i++ ){
         
@@ -94,28 +96,22 @@ int recuperaNLinhas (Matriz* mat){
 Matriz* transposta (Matriz* mat){
     int i, j;
     
-    matriz *matriz = (matriz *)malloc(sizeof(matriz)); 
-    matriz->n = mat->m;
-    matriz->m = mat->n;
+    matriz *matriz = inicializaMatriz (mat->m, mat->n); 
     
-    matriz->mat = (int **)malloc(matriz->m * (int *));
     
-    for(i = 0; i < matriz->m; i++ ){
-        
-        matriz->mat[i] = (int *)malloc(matriz->n * sizeof(int));
- 
-    }
     
     for(i = 0; i < matriz->n; i++ ){
         
         for(j = 0; j < matriz->m; j++){
-            matriz->mat[i][j] = mat->[j][i];
+            matriz->mat[i][j] = mat->mat[j][i];
 
         }
     }
     
     return matriz;
 }
+
+
 
 /*Retorna a matriz multiplicacao entre mat1 e mat2
 * inputs: as matrizes mat1 e mat2
@@ -127,7 +123,7 @@ Matriz* transposta (Matriz* mat){
 Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
     
     //Criacao matriz multiplicacao
-    int i, j, x, aux = 0;
+    int i, j, x, aux = 0, ncomum = mat1->m;
     
     matriz *multi = inicializaMatriz ( mat1->n , mat2->m);
     
@@ -136,9 +132,12 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
         
         for(j = 0; j< multi->m; j++){
             
-            //codigo para receber resultado em aux AQUI
+            for(x = 0; x < ncomum; x++){
+                aux += mat1->mat[i][x] + mat2->mat[x][j];
+            }
             
             multi->mat[i][j] = aux;
+            aux = 0;
         }
         
     }
@@ -164,9 +163,9 @@ void imprimeMatriz(Matriz* mat){
     
     printf("\n\n");
     
-    for(i = 0; i < matriz->n; i++ ){
+    for(i = 0; i < mat->n; i++ ){
         
-        for(j = 0; j < matriz->m; j++){
+        for(j = 0; j < mat->m; j++){
             printf("%d  ", mat->mat[i][j]); 
         }
         
@@ -187,7 +186,7 @@ void destroiMatriz(Matriz* mat){
     int i;
     
     
-    for(i = 0; i < matriz->n; i++ ){
+    for(i = 0; i < mat->n; i++ ){
         
         free(mat->mat[i]);
         
