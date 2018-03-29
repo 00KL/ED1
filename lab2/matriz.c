@@ -133,7 +133,7 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
         for(j = 0; j< multi->m; j++){
             
             for(x = 0; x < ncomum; x++){
-                aux += mat1->mat[i][x] + mat2->mat[x][j];
+                aux += mat1->mat[i][x] * mat2->mat[x][j];
             }
             
             multi->mat[i][j] = aux;
@@ -141,10 +141,6 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
         }
         
     }
-   
-    
-    
-    
     
     return multi;
     
@@ -161,18 +157,24 @@ void imprimeMatriz(Matriz* mat){
     
     int i, j;
     
-    printf("\n\n");
+    printf("\n");
     
     for(i = 0; i < mat->n; i++ ){
         
         for(j = 0; j < mat->m; j++){
-            printf("%d  ", mat->mat[i][j]); 
+            if(mat->mat[i][j] < 10){
+                printf("%d  ", mat->mat[i][j]); 
+            }
+            else{
+                printf("%d ", mat->mat[i][j]); 
+            }
+            
         }
         
         printf("\n");
     }
     
-    printf("\n\n");
+    printf("\n");
 }
 
 
