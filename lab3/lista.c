@@ -87,12 +87,26 @@ void Insere (TipoItem* aluno, TipoLista* lista){
 */
 TipoItem* Retira (TipoLista* lista, int mat){
     celula* aux = (celula*)malloc(sizeof(celula));
+    celula* retira;
 
     aux->prox = lista->prim;
 
     do{
+
         if(aux->prox->itemDaCelula->matricula == mat){
-            
+            aux->itemDaCelula = InicializaTipoItem(aux->prox->itemDaCelula->nome, aux->prox->itemDaCelula->matricula, aux->prox->itemDaCelula->endereco);
+
+            free(aux->prox->itemDaCelula->nome);
+            free(aux->prox->itemDaCelula->endereco);
+            free(aux->prox->itemDaCelula);
+
+            retira = aux->prox;
+
+            aux->prox = aux->prox->prox;
+
+            free(retira);
+
+            return aux;
             
         }
 
