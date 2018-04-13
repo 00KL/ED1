@@ -2,6 +2,7 @@
 #define LISTA_H_
 
 #include <stdio.h>
+#include <string.h>
 #include "lista.h"
 
 /*TipoItem Aluno (tipo opaco)
@@ -10,27 +11,25 @@
   - matricula (int)
   - endereco (string)
   */
-typedef struct tipoitem TipoItem{
+ struct tipoitem {
     
-    char** nome;
+    char* nome;
     int matricula;
-    char** endereco; 
-}
+    char* endereco; 
+};
 
-struct celula{
-    tipoitem* itemDaCelula;
+typedef struct celula celula{
+    Tipoitem* itemDaCelula;
     celula* prox;
-}
+};
 
 /*Tipo que define a lista (tipo opaco)
   Estrutura interna do tipo deve ser definida na implementa��o do TAD.
   Usar lista COM Sentinela
   */
-typedef struct tipolista TipoLista{
-    tipoitem* prox;
-    tipoitem* ulti;
-    tipoitem* prim;
-}
+ struct tipolista {
+    celula* prim, ulti;
+};
 
 /*Inicializa o sentinela de uma lista
 * inputs: nenhum
@@ -38,7 +37,15 @@ typedef struct tipolista TipoLista{
 * pre-condicao: nenhuma
 * pos-condicao: sentinela da lista de retorno existe e os campos primeiro e ultimo apontam para NULL
 */
-TipoLista* InicializaLista();
+TipoLista* InicializaLista(){
+    Tipolista* = lista;
+    lista = (Tipolista* )malloc(sizeof(Tipolista));
+
+    lista->prim = NULL;
+    lista->ulti = NULL;
+
+    return lista;
+}
 
 /*Insere um aluno na primeira posi��o da lista de alunos
 * inputs: aluno a ser inserido na lista (do tipo TipoItem) e a lista
@@ -46,7 +53,31 @@ TipoLista* InicializaLista();
 * pre-condicao: aluno e lista n�o s�o nulos
 * pos-condicao: lista cont�m o aluno inserido na primeira posi��o
 */
-void Insere (TipoItem* aluno, TipoLista* lista);
+void Insere (TipoItem* aluno, TipoLista* lista){
+    if(lista->prim == NULL){
+        celula* celula = (celula*) malloc(sizeof(celula));
+
+        celula->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+
+        celula->prox = NULL;
+
+        lista->prim = celula;
+
+        lista->ulti = celula;
+         
+    } else {
+        celula* celula = (celula*) malloc(sizeof(celula));
+
+        celula->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+
+        celula->prox = lista->prim;
+
+        lista->prim = celula;
+    }
+
+
+
+}
 
 /*Retira um aluno de matr�cula mat da lista de alunos
 * inputs: a lista e a matr�cula do aluno a ser retirado da lista
@@ -54,7 +85,21 @@ void Insere (TipoItem* aluno, TipoLista* lista);
 * pre-condicao: lista n�o � nula
 * pos-condicao: lista n�o cont�m o aluno de matr�cula mat
 */
-TipoItem* Retira (TipoLista* lista, int mat);
+TipoItem* Retira (TipoLista* lista, int mat){
+    celula* aux = (celula*)malloc(sizeof(celula));
+
+    aux->prox = lista->prim;
+
+    do{
+        if(aux->prox->itemDaCelula->matricula == mat){
+            
+            
+        }
+
+
+
+    }while(aux->prox == NULL);
+}
 
 
 /*Imprime os dados de todos os alunos da lista
@@ -80,7 +125,20 @@ TipoLista* Libera (TipoLista* lista);
 * pre-condicao: nome, matricula e endereco validos
 * pos-condicao: tipo item criado, com os campos nome, matricula e endereco copiados
 */
-TipoItem* InicializaTipoItem(char* nome, int matricula, char* endereco);
+TipoItem* InicializaTipoItem(char* nome, int matricula, char* endereco){
+    TipoItem* item = (TipoItem*)malloc(sizeof(TipoItem));
+
+    item->nome = (char*)malloc( (strlen(nome) + 1/*strlen retorna tamanho sem o '\0' */ ) * sizeof(char));
+    strcpy(item->nome, nome);
+
+    item->matricula = matricula;
+
+    item->endereco = (char*)malloc( (strlen(nome) + 1/*strlen retorna tamanho sem o '\0' */ ) * sizeof(char));
+    strcpy(item->endereco, endereco);
+
+
+    return item;
+}
 
 
 #endif /* LISTA_H_ */
