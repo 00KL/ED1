@@ -108,7 +108,19 @@ TipoItem* Retira (TipoLista* lista, int mat){
 * pre-condicao: lista n�o � nula
 * pos-condicao: dados dos alunos impressos na saida padrao
 */
-void Imprime (TipoLista* lista);
+void Imprime (TipoLista* lista){
+    celula* percorre = (celula*)malloc(sizeof(celula));
+
+    percorre->prox = lista->prim;
+
+    while(percorre->prox != NULL){
+        printf("\n\n%s\n", percorre->prox->itemDaCelula->nome);
+        printf("Matricula: %d\n", percorre->prox->itemDaCelula->matricula);
+        printf("%s\n\n", percorre->prox->itemDaCelula->endereco);
+        percorre->prox = percorre->prox->prox;
+    }
+
+}
 
 /*Libera toda a mem�ria alocada para a lista (lembre-se de tambem liberar a memoria para o aluno)
 * inputs: a lista encadeada de alunos
@@ -116,7 +128,23 @@ void Imprime (TipoLista* lista);
 * pre-condicao: lista n�o � nula
 * pos-condicao: mem�ria alocada � liberada
 */
-TipoLista* Libera (TipoLista* lista);
+TipoLista* Libera (TipoLista* lista){
+    celula* percorre;
+
+
+    while(lista->prim != NULL){
+        percorre->prox = lista->prim;
+
+        free(percorre->prox->itemDaCelula->nome);
+        free(percorre->prox->itemDaCelula->endereco);
+        free(percorre->prox->itemDaCelula);
+
+        lista->prim = lista->prim->prox;
+        free(percorre);
+                
+    }
+
+}
 
 
 /*Inicializa um TipoItem aluno
