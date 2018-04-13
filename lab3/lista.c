@@ -1,9 +1,9 @@
-#ifndef LISTA_H_
-#define LISTA_H_
-
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "lista.h"
+
+typedef struct celula celula ;
 
 /*TipoItem Aluno (tipo opaco)
   Estrutura interna do tipo deve ser definida na implementa��o do TAD. Devem ser definidos campos:
@@ -18,8 +18,8 @@
     char* endereco; 
 };
 
-typedef struct celula celula{
-    Tipoitem* itemDaCelula;
+struct celula{
+    TipoItem* itemDaCelula;
     celula* prox;
 };
 
@@ -28,7 +28,7 @@ typedef struct celula celula{
   Usar lista COM Sentinela
   */
  struct tipolista {
-    celula* prim, ulti;
+    celula *prim, *ulti;
 };
 
 /*Inicializa o sentinela de uma lista
@@ -38,8 +38,8 @@ typedef struct celula celula{
 * pos-condicao: sentinela da lista de retorno existe e os campos primeiro e ultimo apontam para NULL
 */
 TipoLista* InicializaLista(){
-    Tipolista* = lista;
-    lista = (Tipolista* )malloc(sizeof(Tipolista));
+    TipoLista* lista;
+    lista = (TipoLista* )malloc(sizeof(TipoLista));
 
     lista->prim = NULL;
     lista->ulti = NULL;
@@ -55,24 +55,24 @@ TipoLista* InicializaLista(){
 */
 void Insere (TipoItem* aluno, TipoLista* lista){
     if(lista->prim == NULL){
-        celula* celula = (celula*) malloc(sizeof(celula));
+        celula *cel = (celula*)malloc(sizeof(celula));
 
-        celula->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
 
-        celula->prox = NULL;
+        cel->prox = NULL;
 
-        lista->prim = celula;
+        lista->prim = cel;
 
-        lista->ulti = celula;
+        lista->ulti = cel;
          
     } else {
-        celula* celula = (celula*) malloc(sizeof(celula));
+        celula* cel = (celula*) malloc(sizeof(celula));
 
-        celula->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
 
-        celula->prox = lista->prim;
+        cel->prox = lista->prim;
 
-        lista->prim = celula;
+        lista->prim = cel;
     }
 
 
@@ -106,7 +106,7 @@ TipoItem* Retira (TipoLista* lista, int mat){
 
             free(retira);
 
-            return aux;
+            return aux->itemDaCelula;
             
         }
 
@@ -181,6 +181,3 @@ TipoItem* InicializaTipoItem(char* nome, int matricula, char* endereco){
 
     return item;
 }
-
-
-#endif /* LISTA_H_ */
