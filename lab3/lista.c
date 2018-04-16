@@ -54,11 +54,14 @@ TipoLista* InicializaLista(){
 * pos-condicao: lista cont�m o aluno inserido na primeira posi��o
 */
 void Insere (TipoItem* aluno, TipoLista* lista){
+    
+    celula *cel = (celula*)malloc(sizeof(celula));
+
+    cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+
+
     if(lista->prim == NULL){
-        celula *cel = (celula*)malloc(sizeof(celula));
-
-        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
-
+        
         cel->prox = NULL;
 
         lista->prim = cel;
@@ -66,9 +69,6 @@ void Insere (TipoItem* aluno, TipoLista* lista){
         lista->ulti = cel;
          
     } else {
-        celula* cel = (celula*) malloc(sizeof(celula));
-
-        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
 
         cel->prox = lista->prim;
 
@@ -86,7 +86,8 @@ void Insere (TipoItem* aluno, TipoLista* lista){
 * pos-condicao: lista n�o cont�m o aluno de matr�cula mat
 */
 TipoItem* Retira (TipoLista* lista, int mat){
-    celula* aux = (celula*)malloc(sizeof(celula));
+    
+    celula* aux;
     celula* retira;
 
     aux->prox = lista->prim;
@@ -113,6 +114,9 @@ TipoItem* Retira (TipoLista* lista, int mat){
 
 
     }while(aux->prox == NULL);
+
+
+
 }
 
 
