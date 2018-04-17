@@ -54,14 +54,11 @@ TipoLista* InicializaLista(){
 * pos-condicao: lista cont�m o aluno inserido na primeira posi��o
 */
 void Insere (TipoItem* aluno, TipoLista* lista){
-    
-    celula *cel = (celula*)malloc(sizeof(celula));
-
-    cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
-
-
     if(lista->prim == NULL){
-        
+        celula *cel = (celula*)malloc(sizeof(celula));
+
+        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+
         cel->prox = NULL;
 
         lista->prim = cel;
@@ -69,6 +66,9 @@ void Insere (TipoItem* aluno, TipoLista* lista){
         lista->ulti = cel;
          
     } else {
+        celula* cel = (celula*) malloc(sizeof(celula));
+
+        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
 
         cel->prox = lista->prim;
 
@@ -86,37 +86,70 @@ void Insere (TipoItem* aluno, TipoLista* lista){
 * pos-condicao: lista n�o cont�m o aluno de matr�cula mat
 */
 TipoItem* Retira (TipoLista* lista, int mat){
-    
-    celula* aux;
-    celula* retira;
+    celula *aux, *retiraCelula;
+    TipoItem* retiraItem;
+
+    int cont = 0;
 
     aux->prox = lista->prim;
 
-    do{
+
+    for(cont = 0 ; cont < 10; cont++){
+
+
+        printf(" 1 TEST\n");
+
 
         if(aux->prox->itemDaCelula->matricula == mat){
-            aux->itemDaCelula = InicializaTipoItem(aux->prox->itemDaCelula->nome, aux->prox->itemDaCelula->matricula, aux->prox->itemDaCelula->endereco);
+            retiraItem = InicializaTipoItem(aux->prox->itemDaCelula->nome, aux->prox->itemDaCelula->matricula, aux->prox->itemDaCelula->endereco);
 
             free(aux->prox->itemDaCelula->nome);
             free(aux->prox->itemDaCelula->endereco);
             free(aux->prox->itemDaCelula);
 
-            retira = aux->prox;
+            retiraCelula = aux->prox;
+            if(aux->prox->prox == NULL){
 
-            aux->prox = aux->prox->prox;
+                lista->ulti = aux;
 
-            free(retira);
-
-            return aux->itemDaCelula;
+                aux->prox = NULL;
             
+            }else{
+                
+                aux->prox = aux->prox->prox;
+
+            }
+
+
+            //free(retira);
+            free(retiraCelula);
+
+            printf("\n\nentrou - mat é: %d \n\n", retiraItem->matricula);
+            printf("\n ENTROU //////////////////////////////////////////////\n");
+
+            return retiraItem;
+            
+            
+            //return NULL;
+        } else{
+            //printf("\n\nnão entrou - mat é: %d \n\n", aux->prox->itemDaCelula->matricula);
+            if(aux->prox == NULL){
+                printf(" 3 TEST\n\n\n");
+                return NULL;
+            }
+            aux = aux->prox;
+
         }
+        
+
+         printf(" 2 TEST\n\n\n");
 
 
+    }
 
-    }while(aux->prox == NULL);
+    printf("\n NAO ENCONTROU //////////////////////////////////////////////\n");
 
-
-
+    return NULL;
 }
 
 
@@ -131,12 +164,13 @@ void Imprime (TipoLista* lista){
 
     percorre->prox = lista->prim;
 
-    while(percorre->prox != NULL){
+    for(int i = 0; percorre->prox != NULL && i < 7 ;  i++){
         printf("\n\n%s\n", percorre->prox->itemDaCelula->nome);
         printf("Matricula: %d\n", percorre->prox->itemDaCelula->matricula);
         printf("%s\n\n", percorre->prox->itemDaCelula->endereco);
         percorre->prox = percorre->prox->prox;
     }
+
 
 }
 
