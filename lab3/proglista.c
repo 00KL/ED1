@@ -34,22 +34,27 @@ int main()
     if (retirado != NULL)
     	Imprime(lista);
     else
-    	printf ("Não foi possivel retirar o aluno de matrícula 123");
+    	printf ("Nï¿½o foi possivel retirar o aluno de matrï¿½cula 123");
 
     //Retira o Joao da lista e imprime
     retirado = Retira(lista, 34);
     if (retirado != NULL)
     	Imprime(lista);
     else
-    	printf ("Não foi possivel retirar o aluno de matrícula 34");
+    	printf ("Nï¿½o foi possivel retirar o aluno de matrï¿½cula 34");
+
+    
 
 
-     //Tenta retirar com um número de matrícula inexistente
+     //Tenta retirar com um nï¿½mero de matrï¿½cula inexistente
       retirado = Retira(lista, 555);
       if (retirado != NULL)
       	Imprime(lista);
       else
-      	printf ("Não foi possivel retirar o aluno de matrícula 555");     
+      	printf ("Nï¿½o foi possivel retirar o aluno de matrï¿½cula 555");
+
+    return(0);
+     
 
       lista = Libera(lista);       
 

@@ -94,63 +94,32 @@ TipoItem* Retira (TipoLista* lista, int mat){
     aux->prox = lista->prim;
 
 
-    for(cont = 0 ; cont < 10; cont++){
-
-
-        printf(" 1 TEST\n");
+    while(aux->prox != NULL){
 
 
         if(aux->prox->itemDaCelula->matricula == mat){
-            retiraItem = InicializaTipoItem(aux->prox->itemDaCelula->nome, aux->prox->itemDaCelula->matricula, aux->prox->itemDaCelula->endereco);
-
-            free(aux->prox->itemDaCelula->nome);
-            free(aux->prox->itemDaCelula->endereco);
-            free(aux->prox->itemDaCelula);
+            retiraItem = aux->prox->itemDaCelula;
 
             retiraCelula = aux->prox;
-            if(aux->prox->prox == NULL){
-
-                lista->ulti = aux;
-
-                aux->prox = NULL;
-            
-            }else{
                 
-                aux->prox = aux->prox->prox;
+            aux->prox = aux->prox->prox;
 
-            }
-
-
-            //free(retira);
             free(retiraCelula);
-
-            printf("\n\nentrou - mat é: %d \n\n", retiraItem->matricula);
-            printf("\n ENTROU //////////////////////////////////////////////\n");
 
             return retiraItem;
             
-            
-            //return NULL;
-        } else{
-            //printf("\n\nnão entrou - mat é: %d \n\n", aux->prox->itemDaCelula->matricula);
-            if(aux->prox == NULL){
-                printf(" 3 TEST\n\n\n");
-                return NULL;
-            }
-            aux = aux->prox;
-
-        }
+        } 
         
-
-         printf(" 2 TEST\n\n\n");
-
-
+        aux = aux->prox;
+        
     }
-
-    printf("\n NAO ENCONTROU //////////////////////////////////////////////\n");
-
+        
     return NULL;
+
 }
+
+    
+
 
 
 /*Imprime os dados de todos os alunos da lista
