@@ -54,11 +54,13 @@ TipoLista* InicializaLista(){
 * pos-condicao: lista cont�m o aluno inserido na primeira posi��o
 */
 void Insere (TipoItem* aluno, TipoLista* lista){
+    
+    celula *cel = (celula*)malloc(sizeof(celula));
+    cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
+
+
     if(lista->prim == NULL){
-        celula *cel = (celula*)malloc(sizeof(celula));
-
-        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
-
+        
         cel->prox = NULL;
 
         lista->prim = cel;
@@ -66,10 +68,6 @@ void Insere (TipoItem* aluno, TipoLista* lista){
         lista->ulti = cel;
          
     } else {
-        celula* cel = (celula*) malloc(sizeof(celula));
-
-        cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
-
         cel->prox = lista->prim;
 
         lista->prim = cel;
@@ -88,8 +86,6 @@ void Insere (TipoItem* aluno, TipoLista* lista){
 TipoItem* Retira (TipoLista* lista, int mat){
     celula *aux, *retiraCelula;
     TipoItem* retiraItem;
-
-    int cont = 0;
 
     aux->prox = lista->prim;
 
@@ -129,17 +125,15 @@ TipoItem* Retira (TipoLista* lista, int mat){
 * pos-condicao: dados dos alunos impressos na saida padrao
 */
 void Imprime (TipoLista* lista){
-    celula* percorre = (celula*)malloc(sizeof(celula));
+    celula *percorre = lista->prim;
 
-    percorre->prox = lista->prim;
+    while( percorre != NULL ){
+        printf("\n\n%s\n", percorre->itemDaCelula->nome);
+        printf("Matricula: %d\n", percorre->itemDaCelula->matricula);
+        printf("%s\n\n", percorre->itemDaCelula->endereco);
+        percorre = percorre->prox;
 
-    for(int i = 0; percorre->prox != NULL && i < 7 ;  i++){
-        printf("\n\n%s\n", percorre->prox->itemDaCelula->nome);
-        printf("Matricula: %d\n", percorre->prox->itemDaCelula->matricula);
-        printf("%s\n\n", percorre->prox->itemDaCelula->endereco);
-        percorre->prox = percorre->prox->prox;
     }
-
 
 }
 
@@ -150,20 +144,27 @@ void Imprime (TipoLista* lista){
 * pos-condicao: mem�ria alocada � liberada
 */
 TipoLista* Libera (TipoLista* lista){
-    celula* percorre;
+    celula *percorre = lista->prim, *aux;
 
 
-    while(lista->prim != NULL){
-        percorre->prox = lista->prim;
+    while(percorre != NULL){
 
-        free(percorre->prox->itemDaCelula->nome);
-        free(percorre->prox->itemDaCelula->endereco);
-        free(percorre->prox->itemDaCelula);
+        
+        free(percorre->itemDaCelula->nome);
+        free(percorre->itemDaCelula->endereco);
+        free(percorre->itemDaCelula);
 
-        lista->prim = lista->prim->prox;
-        free(percorre);
+        aux = percorre;
+        percorre = percorre->prox;
+
+        free(aux);
+        
                 
     }
+
+    free(lista);
+
+    return NULL;
 
 }
 

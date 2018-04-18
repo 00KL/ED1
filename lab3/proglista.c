@@ -34,14 +34,14 @@ int main()
     if (retirado != NULL)
     	Imprime(lista);
     else
-    	printf ("N�o foi possivel retirar o aluno de matr�cula 123");
+    	printf ("N�o foi possivel retirar o aluno de matr�cula 123\n\n");
 
     //Retira o Joao da lista e imprime
     retirado = Retira(lista, 34);
     if (retirado != NULL)
     	Imprime(lista);
     else
-    	printf ("N�o foi possivel retirar o aluno de matr�cula 34");
+    	printf ("N�o foi possivel retirar o aluno de matr�cula 34\n\n");
 
     
 
@@ -51,11 +51,8 @@ int main()
       if (retirado != NULL)
       	Imprime(lista);
       else
-      	printf ("N�o foi possivel retirar o aluno de matr�cula 555");
+      	printf ("N�o foi possivel retirar o aluno de matr�cula 555\n\n");
 
-    return(0);
-     
-
-      lista = Libera(lista);       
+      lista = Libera(lista);
 
 }
