@@ -56,8 +56,7 @@ TipoLista* InicializaLista(){
 void Insere (TipoItem* aluno, TipoLista* lista){
     
     celula *cel = (celula*)malloc(sizeof(celula));
-    cel->itemDaCelula = InicializaTipoItem(aluno->nome, aluno->matricula, aluno->endereco);
-
+    cel->itemDaCelula = aluno;
 
     if(lista->prim == NULL){
         
