@@ -34,7 +34,7 @@ struct pilha{
 * pos-condicao: P est� definida e vazia
 */
 Pilha* cria_pilha(){
-    Pilha P = (Pilha*)malloc(sizeof(Pilha));
+    Pilha *P = (Pilha*)malloc(sizeof(Pilha));
 
     P->topo = 0;
 
@@ -49,8 +49,13 @@ Pilha* cria_pilha(){
 do topo
 */
 void push(Pessoa* pessoa, Pilha* pilha){
-    pilha->pessoas[pilha->topo] = pessoa;
-    pilha->topo++;
+    if(pilha->topo < max){
+         pilha->pessoas[pilha->topo] = pessoa;
+        pilha->topo = pilha->topo + 1;
+    }
+   
+    
+
 }
 
 
@@ -60,12 +65,12 @@ void push(Pessoa* pessoa, Pilha* pilha){
 * pre-condicao: Pilha n�o � nula e n�o � vazia
 * pos-condicao: pilha n�o cont�m o elemento retirado do topo
 */
-Pessoa* pop(Pilha* pilha){
+Pessoa* pop(Pilha *pilha){
     Pessoa *retirada;
 
-    retirada = pilha->pessoas[pilha->topo];
+    retirada = pilha->pessoas[pilha->topo-1];
 
-    pilha->topo--;
+    pilha->topo = pilha->topo - 1;
 
     return retirada;
 }
@@ -77,7 +82,16 @@ Pessoa* pop(Pilha* pilha){
  * pre-condicao: pilha P n�o vazia(fessera falou em aula q era n nula)
  * pos-condicao: Pilha permanece inalterada
  */
-void imprime_pilha (Pilha* pilha);
+void imprime_pilha (Pilha* pilha){
+    int i;
+
+    for(i = 0; i < pilha->topo; i++){
+        printf("%s\n",pilha->pessoas[i]->nome);
+        printf("%d\n", pilha->pessoas[i]->idade);
+        printf("%s\n\n", pilha->pessoas[i]->endereco);
+    }
+
+}
 
 
 /*Libera a memoria ocupada pela pilha
@@ -86,7 +100,20 @@ void imprime_pilha (Pilha* pilha);
 * pre-condicao: Pilha n�o � nula
 * pos-condicao: Toda memoria eh liberada
 */
-Pilha* destroi_pilha(Pilha* pilha);
+Pilha* destroi_pilha(Pilha* pilha){
+    int i;
+
+    for(i = 0; i < pilha->topo; i++){
+        
+        free(pilha->pessoas[i]->nome);
+        free(pilha->pessoas[i]->endereco);
+        free(pilha->pessoas[i]);
+    }
+
+    free(pilha);
+
+    return NULL;
+}
 
 
 /*Inicializa um TipoItem Pessoa
@@ -95,5 +122,15 @@ Pilha* destroi_pilha(Pilha* pilha);
 * pre-condicao: nome, idade e endereco validos
 * pos-condicao: tipo item criado, com os campos nome, idade e endereco copiados
 */
-Pessoa* inicializaPessoa(char* nome, int idade, char* endereco);
+Pessoa* inicializaPessoa(char* nome, int idade, char* endereco){
+    Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
+    p->nome = (char*)malloc(sizeof(char)*strlen(nome));
+    p->endereco = (char*)malloc(sizeof(char)*strlen(endereco));
+
+    strcpy(p->nome, nome);
+    p->idade = idade;    
+    strcpy(p->endereco, endereco);
+    
+    return p;
+}
 
