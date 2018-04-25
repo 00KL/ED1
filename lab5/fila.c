@@ -47,4 +47,7 @@ imprime_fila(Fila *f){
 
 }
 
-vazia_
+int Vazia_fila(Fila *f){
+    return vazia_pilha(f->p1);
+}
+
