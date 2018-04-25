@@ -37,17 +37,28 @@ imprime_fila(Fila *f){
     
     copia_pilha(f->p1, f->p2);
 
-    while(!vazia_pilha(f->p2)){
-        printf("%s \n", f->p2->pessoa[f->p2->topo]->nome);
-        printf("%d \n", f->p2->pessoa[f->p2->topo]->idade);
-        printf("%s \n\n", f->p2->pessoa[f->p2->topo]->endereco);
+    imprime_pilha(f->p2);
 
-        push(pop(f->p2), f->p1);
-    }
+    copia_pilha(f->p2, f->p1);
 
 }
 
 int Vazia_fila(Fila *f){
     return vazia_pilha(f->p1);
+}
+
+/*Separa a fila f de tal forma que as pessoas com idade maior que 60 sejam movidas 
+  para a fila "f_maiores" e as pessoas com idade menor que 60 para a fila "f_menores".
+* inputs: a fila de pessoas, as filas f_maiores e f_menores (inicialmente vazias)
+* output: nao tem
+* pre-condicao: fila f n�o � nula
+* pos-condicao: fila f vazia, pessoas com idade maior ou igual a 60 na fila "f_maiores" 
+e as pessoas com idade menor que 60 para a fila "f_menores" */
+void separa_filas (Fila* f, Fila* f_maiores, Fila* f_menores){
+    while(!vazia_pilha(fila->p1)){
+        if(retorna_idade(f->p1) > 60){
+
+        }
+    }
 }
 
