@@ -53,8 +53,12 @@ int Vazia_fila(Fila *f){
 * output: nao tem
 * pre-condicao: fila f n�o � nula
 * pos-condicao: fila f vazia, pessoas com idade maior ou igual a 60 na fila "f_maiores" 
-e as pessoas com idade menor que 60 para a fila "f_menores" */
+e as pessoas com idade menor que 60 para a fila "f_menores" 
+usar o pop para uma varaivel pessoa em p1
+checar a idade da pessoa 
+usar o push para colocar a pessoa nem p2*/
 void separa_filas (Fila* f, Fila* f_maiores, Fila* f_menores){
+    
     while(!vazia_pilha(fila->p1)){
         if(retorna_idade(f->p1) > 60){
 
