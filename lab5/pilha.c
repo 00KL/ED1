@@ -53,8 +53,8 @@ void push(Pessoa* pessoa, Pilha* pilha){
          pilha->pessoas[pilha->topo] = pessoa;
         pilha->topo = pilha->topo + 1;
     }
-   
-    
+
+
 
 }
 
@@ -104,7 +104,7 @@ Pilha* destroi_pilha(Pilha* pilha){
     int i;
 
     for(i = 0; i < pilha->topo; i++){
-        
+
         free(pilha->pessoas[i]->nome);
         free(pilha->pessoas[i]->endereco);
         free(pilha->pessoas[i]);
@@ -124,13 +124,37 @@ Pilha* destroi_pilha(Pilha* pilha){
 */
 Pessoa* inicializaPessoa(char* nome, int idade, char* endereco){
     Pessoa *p = (Pessoa*)malloc(sizeof(Pessoa));
-    p->nome = (char*)malloc(sizeof(char)*strlen(nome));
-    p->endereco = (char*)malloc(sizeof(char)*strlen(endereco));
+
+    p->nome = (char*)malloc(sizeof(char)*strlen(nome) + 1);
+    p->endereco = (char*)malloc(sizeof(char)*strlen(endereco) + 1);
 
     strcpy(p->nome, nome);
-    p->idade = idade;    
+    p->idade = idade;
     strcpy(p->endereco, endereco);
-    
+
     return p;
 }
 
+/*Retorna a idade de uma pessoa
+* inputs: Uma estrutura pessoa
+* output: idade da pessoa
+* pre-condicao: Pessoa P n�o nula
+* pos-condicao: Os dados da pessoa permanecem inalterados
+*/
+int retorna_idade (Pessoa* p){
+    return p->idade;
+}
+
+/*Verifica se a pilha estah vazia
+* inputs: a Pilha
+* output: 1 (se vazia), 0 (caso contrario)
+* pre-condicao: Pilha n�o � nula
+* pos-condicao: Pilha permanece inalterada
+*/
+int vazia_pilha (Pilha* pilha){
+    if(pilha->topo  == 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
