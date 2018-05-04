@@ -87,7 +87,7 @@ ListaHet *cria (){
 */
 Cliente* cria_cliente (char* nome, int id){
   Cliente *pessoa = (Cliente *)malloc(sizeof(Cliente));
-  pessoa->nome = (char *)malloc(sizeof(char)*strlen(nome)+1);
+  pessoa->nome = (char *)malloc(sizeof(char)* (strlen(nome)+1) );
   strcpy(pessoa->nome, nome);
   pessoa->id = id;
 
@@ -177,13 +177,13 @@ void imprime_cliente(Cliente *dono){
 void imprime_movel(Movel *carro){
   printf("placa: %d\n", carro->placa);
   printf("ano: %d\n", carro->ano);
-  printf("valor: %.2f\n", carro->valor);
+  printf("valor: %.2f\n\n", carro->valor);
 }
 
 void imprime_imovel(Imovel *casa){
   printf("Identificador: %d\n", casa->identificador);
   printf("Ano: %d\n", casa->ano);
-  printf("Valor: %.2f\n", casa->valor);
+  printf("Valor: %.2f\n\n", casa->valor);
 }
 
 /*Imprime os elementos da lista. Para cada elemento da lista, deve-se imprimir
@@ -206,24 +206,10 @@ void imprime (ListaHet* lista){
       imprime_imovel(percorre->item);
     }
 
-    printf("\n");
-
   }
   printf("\n");
 }
 
-void free_Cliente(Cliente* pessoa){
-  free(pessoa->nome);
-  free(pessoa);
-}
-
-void free_Movel(Movel* carro){
-  free(carro);
-}
-
-void free_Imovel(Imovel* casa){
-  free(casa);
-}
 
 /*Retira da lista todos os itens assegurados de um dado cliente
 * inputs: a lista e o identificador do cliente
@@ -234,7 +220,6 @@ eh id_cliente
 */
 ListaHet* retira_cliente (ListaHet* lista, int id_cliente){
   ListaHet *percorre = lista, *auxiliar = NULL;
-  Cliente *retirado;
 
   if(lista->dono == NULL){
     return lista;
@@ -243,27 +228,22 @@ ListaHet* retira_cliente (ListaHet* lista, int id_cliente){
   while(percorre->Prox != NULL){
 
     if(percorre->dono->id == id_cliente){
-      retirado = percorre->dono;
 
-      if(percorre->identificador_do_item  == MOVEL){
-        free_Movel(percorre->item);
-      }
-      else{
-        free_Imovel(percorre->item);
-      }
+      free(percorre->item);
+
 
       if(auxiliar == NULL){
-         lista = percorre->Prox;
-         free(percorre);
-         percorre = lista;
+        lista = percorre->Prox;
+        free(percorre);
+        percorre = lista;
       }
       else{
-         auxiliar->Prox = percorre->Prox;
-         free(percorre);
-         percorre = auxiliar->Prox;
+        auxiliar->Prox = percorre->Prox;
+        free(percorre);
+        percorre = auxiliar->Prox;
       }
 
-    }
+   }
 
 
     else{
@@ -272,8 +252,6 @@ ListaHet* retira_cliente (ListaHet* lista, int id_cliente){
     }
 
   }
-
-  free_Cliente(retirado);
 
   return lista;
 }

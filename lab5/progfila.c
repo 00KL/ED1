@@ -14,7 +14,7 @@ int main()
 
     // tentando imprimir a fila (ainda vazia neste momento)
     imprime_fila(f);
- 
+
      // criando algumas pessoas apenas para testar (mais adequado seria carregar de um arquivo)
     Pessoa* pessoa1= inicializaPessoa("pessoa1", 51, "rua da pessoa1");
     Pessoa* pessoa2= inicializaPessoa("pessoa2", 63, "rua da pessoa2");
@@ -29,11 +29,11 @@ int main()
     Pessoa* pessoa11= inicializaPessoa("pessoa11", 13, "rua da pessoa11");
 
     //Insere os pessoas na fila
-    insere(pessoa1, f); 
-    insere(pessoa2, f); 
-    insere(pessoa3, f); 
-    insere(pessoa4, f); 
-    insere(pessoa5, f); 
+    insere(pessoa1, f);
+    insere(pessoa2, f);
+    insere(pessoa3, f);
+    insere(pessoa4, f);
+    insere(pessoa5, f);
     insere(pessoa6, f);
     insere(pessoa7, f);
     insere(pessoa8, f);
@@ -75,9 +75,9 @@ int main()
     //Imprime a fila com todas as pessoas
     imprime_fila(f);
 
-    
-    Fila* f_maiores = cria_fila(); 
-    Fila* f_menores = cria_fila(); 
+
+    Fila* f_maiores = cria_fila();
+    Fila* f_menores = cria_fila();
 
     separa_filas(f, f_maiores, f_menores);
 
@@ -94,7 +94,7 @@ int main()
     //Imprime a fila com todas as pessoas menores que 60
     imprime_fila(f_menores);
 
-    //libera a memória ocupada pela fila 
+    //libera a memï¿½ria ocupada pela fila
     f = destroi_fila(f);
 
 }
