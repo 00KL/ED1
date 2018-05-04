@@ -299,12 +299,13 @@ float valor_Imovel(Imovel *casa, float taxa){
 * pos-condicao: lista inalterada
 */
 float calcula_valor_assegurado (ListaHet* lista, Cliente* dono, float taxa_movel, float taxa_imovel){
-  ListaHet *percorre;
+  ListaHet *percorre = lista;
   float valor_total;
+
+
   while(percorre->Prox != NULL){
-
+    //printf("%s - %s - test\n", dono->nome, percorre->dono->nome);
     if(dono->nome == percorre->dono->nome){
-
       if(percorre->identificador_do_item == MOVEL){
         valor_total += valor_Movel(percorre->item, taxa_movel);
       }

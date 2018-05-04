@@ -43,7 +43,7 @@ int main()
 
     float valor_assegurado_jose = calcula_valor_assegurado (lista, jose, 0.7, 0.25);
 
-    printf ("O valor assegurado de Jose eh: %f \n", valor_assegurado_jose);
+    printf ("O valor assegurado de Jose eh: %.2f \n", valor_assegurado_jose);
 
 
     lista = retira_cliente (lista, 1);
