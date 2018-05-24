@@ -37,7 +37,6 @@ int main()
      Arv* pai = arv_pai (a, 'a');
      printf ("Pai do no c: %c \n", info(pai));
 
-     return 0;
      // retorna o numero de folhas da arvore (3)
      int f = folhas(a);
      printf ("Numero de folhas da arvore: %d \n", f);

@@ -26,7 +26,14 @@ Arv* arv_cria (char c, Arv* e, Arv* d){
 }
 
 //libera o espa�o de mem�ria ocupado pela �rvore a
-Arv* arv_libera (Arv* a);
+Arv* arv_libera (Arv* a){
+    if(!arv_vazia(a)){
+        arv_libera(a->dir);
+        arv_libera(a->esq);
+        free(a);
+    }
+    return NULL;
+}
 
 //retorna true se a �rvore estiver vazia e false
 //caso contr�rio
@@ -73,9 +80,20 @@ int arv_pertence_filho (Arv* a, char c){
 
 //retorna o pai de um dado no
 Arv* arv_pai (Arv* a, char c){
+
     if(!arv_vazia(a)){
 
-        if( arv_pertence_filho(a->esq, c) || arv_pertence_filho(a->dir, c) ){
+        if(a->info == c){
+            return a;
+        }
+
+        if( arv_pertence_filho(a->esq, c) ){
+            printf("%c\n\n", a->info);
+            return a;
+        }
+
+        if( arv_pertence_filho(a->dir, c) ){
+            printf("%c\n\n", a->info);
             return a;
         }
 
@@ -84,10 +102,13 @@ Arv* arv_pai (Arv* a, char c){
             return esquerda;
         }
 
+
         Arv* direita = arv_pai(a->dir, c);
         if(direita != NULL){
             return direita;
         }
+
+
 
     }
 
@@ -95,10 +116,33 @@ Arv* arv_pai (Arv* a, char c){
 }
 
 //retorna a quantidade de folhas de uma arvore binaria
-int folhas (Arv* a);
+int folhas (Arv* a){
+    int cont = 0;
+    if(!arv_vazia(a)){
+        if(!arv_vazia(a->esq) && !arv_vazia(a->dir)){
+            cont++;
+        }
+
+        cont = cont + folhas(a->esq) + folhas(a->dir);
+    }
+
+    return cont;
+}
 
 //retorna o numero de ocorrencias de um dado caracter na arvore
-int ocorrencias (Arv* a, char c);
+int ocorrencias (Arv* a, char c){
+    int cont = 0;
+    if(!arv_vazia(a)){
+        if(a->info == c){
+            cont += 1;
+        }
+
+        cont += ocorrencias(a->esq, c);
+        cont += ocorrencias(a->dir, c);
+    }
+
+    return cont;
+}
 
 //retorna o campo informacao de um dado no
 char info (Arv* a){
