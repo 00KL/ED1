@@ -1,23 +1,23 @@
 typedef struct arv Arv;
 
-//Cria uma árvore vazia
+//Cria uma ï¿½rvore vazia
 Arv* arv_criavazia (void);
 
-//cria uma árvore com a informação do nó raiz c, e
-//com subárvore esquerda e e subárvore direita d
+//cria uma ï¿½rvore com a informaï¿½ï¿½o do nï¿½ raiz c, e
+//com subï¿½rvore esquerda e e subï¿½rvore direita d
 Arv* arv_cria (char c, Arv* e, Arv* d);
 
-//libera o espaço de memória ocupado pela árvore a
+//libera o espaï¿½o de memï¿½ria ocupado pela ï¿½rvore a
 Arv* arv_libera (Arv* a);
 
-//retorna true se a árvore estiver vazia e false 
-//caso contrário
+//retorna true se a ï¿½rvore estiver vazia e false
+//caso contrï¿½rio
 int arv_vazia (Arv* a);
 
-//indica a ocorrência (1) ou não (0) do caracter c
+//indica a ocorrï¿½ncia (1) ou nï¿½o (0) do caracter c
 int arv_pertence (Arv* a, char c);
 
-//imprime as informações dos nós da árvore
+//imprime as informaï¿½ï¿½es dos nï¿½s da ï¿½rvore
 void arv_imprime (Arv* a);
 
 //retorna o pai de um dado no
@@ -26,7 +26,7 @@ Arv* arv_pai (Arv* a, char c);
 //retorna a quantidade de folhas de uma arvore binaria
 int folhas (Arv* a);
 
-//retorna o numero de ocorrencias de um dado caracter na arvore 
+//retorna o numero de ocorrencias de um dado caracter na arvore
 int ocorrencias (Arv* a, char c);
 
 //retorna o campo informacao de um dado no

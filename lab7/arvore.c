@@ -13,6 +13,8 @@ Arv* arv_criavazia (void){
     return NULL;
 }
 
+
+
 //cria uma �rvore com a informa��o do n� raiz c, e
 //com sub�rvore esquerda e e sub�rvore direita d
 Arv* arv_cria (char c, Arv* e, Arv* d){
