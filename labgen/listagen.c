@@ -6,13 +6,13 @@ struct listagen{
     struct listagen* prox;
 };
 
-void* Percorre(ListaGen* l , void* (*callback)(void*, void*), void* dado){
+int percorre(ListaGen* l , int (*callback)(void*, void*), void* dado){
     ListaGen* p;
-    void* r = NULL;
+    int r = 0;
 
     for(p=l; p!=NULL; p=p->prox){
         r = callback(p->info, dado);
-        if(r){
+        if(r != 0){
             return r;
         }
     }
@@ -24,6 +24,14 @@ ListaGen* inicializa_ListaGen(){
     ListaGen* l = (ListaGen*)malloc( sizeof(ListaGen) );
     l->info = NULL;
     l->prox = NULL;
+
+    return l;
+}
+
+ListaGen* insere_generica(ListaGen* l,  void* p){
+    ListaGen* novo = (ListaGen*)malloc(sizeof(ListaGen));
+    novo->info = p;
+    novo->prox = l;
 
     return l;
 }
