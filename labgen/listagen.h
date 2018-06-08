@@ -10,3 +10,5 @@ int percorre(ListaGen* , int (*callback)(void*, void*), void*);
 ListaGen* inicializa_ListaGen();
 
 void* listavazia(ListaGen* );
+
+void libera_lista(ListaGen*);

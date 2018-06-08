@@ -54,7 +54,8 @@ int igualdade(void* p, void* q){
 }
 
 Cg calcCentroGeom(ListaGen* lista){
-    Cg cg ;
+    Cg cg;
+
 
       cg.p.x = 0;
       cg.p.y = 0;
@@ -98,17 +99,23 @@ int main () {
 
   if(percorre(lista, igualdade, ponto1) == 0){
       printf("O %.1f %.1f não pertence a lista.\n", ponto1->x, ponto1->y);
+      free(ponto1);
   }
   if(percorre(lista, igualdade, ponto2) == 0){
       printf("O %.1f %.1f não pertence a lista.\n", ponto2->x, ponto2->y);
+      free(ponto2);
   }
   if(percorre(lista, igualdade, ponto3) == 0){
       printf("O %.1f %.1f não pertence a lista.\n", ponto3->x, ponto3->y);
+      free(ponto3);
   }
 
   //Calcular Centro Geometrico
   Cg cg = calcCentroGeom(lista);
   printf("CentroGeometrico: x: %.1f y: %.1f\n",cg.p.x,cg.p.y);
+
+  libera_lista(lista);
+
 
   return 0;
 }

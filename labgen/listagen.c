@@ -7,7 +7,7 @@ struct listagen{
 };
 
 void* listavazia(ListaGen* l){
-    if(!l->info){
+    if(!l->info || !l){
         return NULL;
     }
 
@@ -48,4 +48,14 @@ int percorre(ListaGen* l , int (*callback)(void*, void*), void* dado){
     }
 
     return r;
+}
+
+void libera_lista(ListaGen* lista){
+    ListaGen* aux;
+    while(lista){
+        aux = lista;
+        lista = lista->prox;
+        free(aux->info);
+        free(aux);
+    }
 }
