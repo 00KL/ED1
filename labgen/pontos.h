@@ -2,7 +2,7 @@
 
 //structs
 typedef struct ponto Ponto;
-typedef struct cg CG;
+typedef struct cg Cg;
 
 //Callbacks
 int imprime(void* /*Ponto*/, void* /*NULL*/);
@@ -11,4 +11,4 @@ int CentroGeom(void* /*Ponto*/, void* /*Ponto*/);
 
 //Funções principais
 void imprime_ListaGen(ListaGen *);
-void inserePonto(ListaGen*, int, int);
+ListaGen* inserePonto(ListaGen*, int, int);

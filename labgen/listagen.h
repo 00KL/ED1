@@ -8,3 +8,5 @@ ListaGen* insere_generica(ListaGen* , void*);
 int percorre(ListaGen* , int (*callback)(void*, void*), void*);
 
 ListaGen* inicializa_ListaGen();
+
+void* listavazia(ListaGen* );
