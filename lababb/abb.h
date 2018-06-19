@@ -7,9 +7,12 @@ typedef struct arv{
     struct arv* dir;
 }arv;
 
-arv* cria_vazia();
-void imprime_crescente(arv*);
-void insere(arv*, int );
+
 arv* busca(arv*, int);
 void retira(arv*, int);
 void libera(arv*);
+
+//pronta
+arv* cria_vazia();
+void imprime_crescente(arv*);
+arv* insere(arv*, int );

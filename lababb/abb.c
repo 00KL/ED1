@@ -9,12 +9,11 @@ int arvore_vazia(arv* arvore){
     if(arvore == NULL){
         return 1;
     }
-    else{
-        return 0;
-    }
+
+    return 0;
 }
 
-void insere(arv* arvore, int x){
+arv* insere(arv* arvore, int x){
     //caso a arvore esteja vazia é importante
     //setar o valor do camo info da raiz
     if(arvore_vazia(arvore)){
@@ -23,7 +22,9 @@ void insere(arv* arvore, int x){
         arvore->esq = NULL;
         arvore->dir = NULL;
         arvore->info = x;
-        printf("%d \n", x);
+        printf("%d \n", arvore->info);
+
+        return arvore;
     }
 
     else{
@@ -31,36 +32,53 @@ void insere(arv* arvore, int x){
         //ele deve ser inserido a esquerda
         if(arvore->info > x){
 
-            //caso n haja a filhos a esquerda um novo deve ser
+
+            //caso n haja filhos a esquerda um novo deve ser
             //criado e o novo valor inserido
             if(arvore->esq == NULL){
-                arv* novo = cria_vazia();
+                arv* novo = (arv*)malloc(sizeof(arv));
+
+                novo->esq = NULL;
+                novo->dir = NULL;
                 novo->info = x;
 
+
                 arvore->esq = novo;
+
+
+                return arvore;
             }
 
-            //caso haja um filho a esquerda deve um recursão da
+            //caso haja um filho a esquerda o novo valor
             //funcao e executada considerando o no a esquerda da
-            //raiz original como nova raiz
+            //raiz original como nova raiz numa recursão
             else{
-                insere(arvore->esq, x);
+                arvore->esq = insere(arvore->esq, x);
+
+                return arvore;
             }
         }
 
-        //Caso o valor a ser inserido seja menor q a raiz
+        //Caso o valor a ser inserido seja maior q a raiz
         //ele deve ser inserido a direita
         if(arvore->info < x){
 
             if(arvore->dir == NULL){
-                arv* novo = cria_vazia();
+                arv* novo = (arv*)malloc(sizeof(arv));
+
+                novo->esq = NULL;
+                novo->dir = NULL;
                 novo->info = x;
 
                 arvore->dir = novo;
+
+                return arvore;
             }
 
             else{
-                insere(arvore->dir, x);
+                arvore->dir = insere(arvore->dir, x);
+
+                return arvore;
             }
         }
 
@@ -70,16 +88,16 @@ void insere(arv* arvore, int x){
 
 void imprime_crescente(arv* arvore){
     if(arvore_vazia(arvore)){
-        printf("< >");
+        printf("(VAZIO");
     }
     else{
-        printf("<%d ", arvore->info);
+        printf("(%d ", arvore->info);
 
         imprime_crescente(arvore->esq);
-        printf(">");
+        printf(")   ");
 
         imprime_crescente(arvore->dir);
-        printf("> >");
+        printf(")%d", arvore->info);
     }
 }
 
