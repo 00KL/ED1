@@ -8,11 +8,14 @@ typedef struct arv{
 }arv;
 
 
-arv* busca(arv*, int);
-void retira(arv*, int);
+
+
 void libera(arv*);
 
 //pronta
 arv* cria_vazia();
 void imprime_crescente(arv*);
 arv* insere(arv*, int );
+int busca(arv*, int);
+arv* retira(arv*, int);
+arv* retira_aux(arv* , int );//auxliar

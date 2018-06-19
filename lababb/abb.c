@@ -84,6 +84,8 @@ arv* insere(arv* arvore, int x){
 
     }
 
+    return NULL;
+
 }
 
 void imprime_crescente(arv* arvore){
@@ -101,9 +103,140 @@ void imprime_crescente(arv* arvore){
     }
 }
 
-/*
-arv* busca(arv* arvore, inr x){
-    if(arvore_vazia(arvore)){
-        if(arvore->info)
+
+int busca(arv* arvore, int x){
+    if(!arvore_vazia(arvore)){
+
+        if(arvore->info == x){
+            return 1;
+        }
+
+        else{
+
+            if(arvore->info > x){
+                return busca(arvore->esq, x);
+            }
+
+            else{
+                return busca(arvore->dir, x);
+            }
+
+        }
     }
-}*/
+
+    return 0;
+}
+
+/////////////////////////////RETIRA
+arv* tira_folha(arv* folha){
+    free(folha);
+    return NULL;
+}
+
+int maior(arv* arvore){
+    //checa se arvore é vazia
+    if(!arvore_vazia(arvore)){
+        //caso a arvore a direita seja vazia
+        //a raiz atual é a maior de toda a arvore
+        if(arvore_vazia(arvore->dir)){
+
+            return arvore->info;
+        }
+
+        //caso haja mais nos a direita existe algum
+        //valor maior q ainda deve ser retornado
+        else{
+            return maior(arvore->dir);
+        }
+    }
+
+    return 0;
+}
+
+int menor(arv* arvore){
+    if(!arvore_vazia(arvore)){
+
+        if(arvore_vazia(arvore->esq)){
+            return arvore->info;
+        }
+
+        else{
+            return menor(arvore->esq);
+        }
+    }
+
+    return 0;
+}
+
+arv* reestrutura(arv* arvore){
+    if(!arvore_vazia(arvore)){
+        if(!arvore_vazia(arvore->esq)){
+            arvore->info = maior(arvore->esq);
+            arvore->esq = retira_aux(arvore->esq, arvore->info);
+
+
+            return arvore;
+        }else{
+            arvore->info = menor(arvore->dir);
+
+            arvore->dir = retira_aux(arvore->dir, arvore->info);
+
+
+            return arvore;
+        }
+    }
+
+    return NULL;
+}
+
+arv* retira_aux(arv* arvore, int x){
+        if(arvore->info == x){
+            //folha
+            if(arvore->esq == NULL && arvore->dir == NULL){
+                return tira_folha(arvore);
+            }
+            //no
+            else{
+                return reestrutura(arvore);
+            }
+
+        }
+
+        else if(arvore->info > x){
+            arvore->esq = retira_aux(arvore->esq, x);
+            return arvore;
+        }
+
+        else if(arvore->info < x){
+            arvore->dir = retira_aux(arvore->dir, x);
+            return arvore;
+        }
+
+        return NULL;
+
+}
+
+arv* retira(arv* arvore, int x){
+    if(busca(arvore, x)){
+        arvore = retira_aux(arvore, x);
+
+        imprime_crescente(arvore);
+        printf("\n\n" );
+
+        return arvore;
+    }
+
+    else{
+        printf("O elemento nao existe na arvore.");
+        return NULL;
+    }
+}
+////////////////////RETIRA
+
+void libera(arv* arvore){
+    if(!arvore_vazia(arvore)){
+        libera(arvore->esq);
+        libera(arvore->dir);
+        free(arvore);
+    }
+}
