@@ -4,7 +4,7 @@ int main(int argc, char **argv){
     FILE *entrada = fopen(argv[1], "r");
     char c[MAXPAL];
     hash tab;
-    palavra *p;
+    palavra *p,
 
     inicializa_hash(tab);
     //int caracter = 0, indice;
@@ -13,10 +13,16 @@ int main(int argc, char **argv){
     //hash = inicializa_hash(hash);
 
     while(le_palavra(entrada, c)){
-        //print para test
+        //Coloca palavra na tabela caso ela n esteja
+        //Soma 1 a ocorrencia da palavra se ela ja existir
+        //Coloca numa lista encadeada as palavras de mesma
+        //chave de acesso
         p = acessa(tab, c);
-    
     }
+
+    imprime_crescente(tab);
+
+
 
     fclose(entrada);
     return 0;

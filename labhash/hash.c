@@ -87,6 +87,59 @@ palavra *acessa(hash tab, char* c){
     return p;
 
 }
+
+int tamanho_hash(hash tab){
+    int i, total = 0;
+    palavra* p;
+
+    for(i = 0; i < MAXTAB; i++){
+        for(p = tab[i]; p != NULL; p = p->prox){
+            total++;
+        }
+    }
+
+    return total;
+}
+
+palavra** inicia_vet(hash tab, int TAM_HASH){
+    palavra** vet = (palavra**)malloc(TAM_HASH*sizeof(palavra*));
+    int i, aux = 0;
+    palavra* p;
+    for(i = 0; i < MAXTAB; i++){
+        for(p = tab[i]; p != NULL; p = p->prox){
+            vet[aux] = p;
+            aux++;
+        }
+    }
+
+    return vet;
+}
+
+int compara_palavras(const void* p1, const void* p2){
+    palavra** x = (palavra **)p1;
+    palavra** y = (palavra **)p2;
+
+    if( (*x)->cont > (*y)->cont) return 1;
+    else if( (*x)->cont < (*y)->cont) return 0;
+    else return strcmp( (*x)->conteudo, (*y)->conteudo);
+}
+
+void imprime_crescente(palavra** tab){
+    palavra **vet;
+    int TAM_HASH, i;
+
+    TAM_HASH = tamanho_hash(tab);
+    printf("%d\n\n", TAM_HASH);
+
+    vet = inicia_vet(tab, TAM_HASH);
+    qsort(vet, TAM_HASH, sizeof(palavra*), compara_palavras);
+
+    for(i = 0; i <= TAM_HASH; i++){
+        printf("%s -> %d \n", vet[i]->conteudo, vet[i]->cont );
+    }
+
+    free(vet);
+}
 // texto insere_palavra(texto hash, palavra c){
 //     hash[gera_indice(c)].conteudo = c;
 //

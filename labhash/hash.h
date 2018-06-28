@@ -14,3 +14,4 @@ int gera_indice(char*);
 int le_palavra(FILE*, char* );
 palavra *acessa(hash , char*);
 void print_pessoa(palavra*);
+void imprime_crescente(palavra **);
