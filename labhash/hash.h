@@ -2,9 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef char* palavra;
-typedef struct texto texto;
+#define MAXPAL 64 //tamanho em caracteres de uma palavra
+#define MAXTAB 127 //tamanho maximo da tabela hash
 
-texto* inicializa_hash(texto*);
+typedef struct palavra palavra;
+typedef palavra* hash[MAXTAB];
 
-int gera_indice(palavra);
+//texto* inicializa_hash(texto*);
+void inicializa_hash(hash);
+int gera_indice(char*);
+int le_palavra(FILE*, char* );
+palavra *acessa(hash , char*);
+void print_pessoa(palavra*);

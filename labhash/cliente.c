@@ -2,13 +2,27 @@
 
 int main(int argc, char **argv){
     FILE *entrada = fopen(argv[1], "r");
-    palavra c = (palavra)malloc(sizeof(char)*50);
-    int caracter = 0, indice;
+    char c[MAXPAL];
+    hash tab;
+    palavra *p;
 
-    palavra hash[101] = {'\0'};
+    inicializa_hash(tab);
+    //int caracter = 0, indice;
+
+    //char* hash[101] = {'\0'};
     //hash = inicializa_hash(hash);
 
-    while(!feof(entrada) ){
+    while(le_palavra(entrada, c)){
+        //print para test
+        p = acessa(tab, c);
+    
+    }
+
+    fclose(entrada);
+    return 0;
+}
+
+/*    while(!feof(entrada) ){
         c[caracter] = fgetc(entrada);
 
 
@@ -50,10 +64,9 @@ int main(int argc, char **argv){
 
     }
 
+    //Caso a posição da lista n esteja preenchida da segmetation foult
     if(hash[2] == '\0'){
         printf("test\n\n");
     }
 
-    fclose(entrada);
-    return 0;
-}
+    */
