@@ -47,10 +47,6 @@ void inicializa_hash(hash tab){
         tab[i] = NULL;
 }
 
-void print_pessoa(palavra* p){
-    printf("conteudo: %s ", p->conteudo);
-    printf("Contador: %d\n", p->cont);
-}
 
 palavra *acessa(hash tab, char* c){
     palavra* p;
@@ -65,7 +61,6 @@ palavra *acessa(hash tab, char* c){
     for(p=tab[indice]; p!=NULL; p=p->prox){
         if(strcmp(p->conteudo,c) == 0){
             p->cont++;
-            print_pessoa(p);
             return p;
         }
     }
@@ -129,34 +124,23 @@ void imprime_crescente(palavra** tab){
     int TAM_HASH, i;
 
     TAM_HASH = tamanho_hash(tab);
-    printf("%d\n\n", TAM_HASH);
 
     vet = inicia_vet(tab, TAM_HASH);
     qsort(vet, TAM_HASH, sizeof(palavra*), compara_palavras);
 
-    for(i = 0; i <= TAM_HASH; i++){
+    for(i = 0; i < TAM_HASH; i++){
         printf("%s -> %d \n", vet[i]->conteudo, vet[i]->cont );
     }
 
     free(vet);
 }
-// texto insere_palavra(texto hash, palavra c){
-//     hash[gera_indice(c)].conteudo = c;
-//
-//     return hash;
-// }
 
-// palavra* insere_palavra(palavra c, texto* hash, int *aux){
-//     c[&aux] = '\0';
-//
-//
-//
-//     free(c);
-//     c = (char*)malloc(sizeof(char)*50);
-//     aux = -1;
-// }
-
-// texto* inicializa_hash(texto* hash){
-//     hash = (texto*)malloc(sizeof(texto)*101);
-//     return hash;
-// }
+void free_palavras(hash tab){
+    int i;
+    palavra* p;
+    for(i = 0; i < MAXTAB; i++){
+        for(p = tab[i]; p != NULL; p = p->prox){
+            free(p);
+        }
+    }
+}
